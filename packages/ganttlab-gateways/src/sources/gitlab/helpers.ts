@@ -22,6 +22,13 @@ export function getTaskFromGitLabIssue(gitlabIssue: GitLabIssue): Task {
       ? new Date(gitlabIssue.due_date)
       : gitlabIssue.milestone && gitlabIssue.milestone.due_date
       ? new Date(gitlabIssue.milestone.due_date)
+      : gitlabIssue.time_stats.time_estimate !== 0
+      ? new Date(
+          new Date(
+            gitlabIssue.milestone?.start_date || gitlabIssue.created_at,
+          ).getTime() +
+            gitlabIssue.time_stats.time_estimate * 1000,
+        )
       : undefined,
   );
 }

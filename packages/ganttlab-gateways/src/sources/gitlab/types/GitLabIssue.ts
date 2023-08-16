@@ -7,4 +7,8 @@ export interface GitLabIssue {
   description: string;
   due_date: string;
   milestone: GitLabMilestone | null;
+  time_stats: {
+    time_estimate: number;
+    total_time_spent: number;
+  };
 }
